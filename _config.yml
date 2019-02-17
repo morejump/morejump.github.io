@@ -10,7 +10,7 @@ user_title: MoreJump Android Developer
 email: luuvanthaoepu@gmail.com
 github_username:  morejump
 linkedin_public_url: morejump # Example: For public profile 'www.linkedin.com/in/john-smith', 'john-smith' is your linkedin_public_url
-profile_picture: src/img/blog-author.jpg
+profile_picture: https://avatars.githubusercontent.com/morejump
 
 # Build settings
 markdown: kramdown
