@@ -30,13 +30,13 @@ links:
     - title: home
       url: /
       key_trigger: 1
-    - title: facebook
-      url: https://www.facebook.com/morejump
-      key_trigger: 2
     - title: about me
       url: /about
-      key_trigger: 3
+      key_trigger: 2
   section_2:
+    - title: facebook
+      url: https://www.facebook.com/morejump
+      key_trigger: f
     - title: github
       url: http://www.github.com/morejump
       new_tab: true
