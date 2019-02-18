@@ -53,8 +53,8 @@ links:
 
 # projects in header index
 projects:
-  - name: fluany
-    url: https://github.com/fluany/fluany
+  - name: mjgenerator
+    url: https://www.npmjs.com/package/mjgenerator
   - name: vim-frontend
     url: https://github.com/victorvoid/vim-frontend
   - name: generator-capybara
