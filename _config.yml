@@ -1,8 +1,8 @@
 # Site settings
 title: Morejump - Android Developer
 description: "A blog about MoreJump ..."
-baseurl: "" # for test: remove string '/space-jekyll-template' to ''
-url: "" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
+baseurl: "sun-asterisk.dev" # for test: remove string '/space-jekyll-template' to ''
+url: "sun-asterisk.dev" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
 
 # User settings
 username: MoreJump
