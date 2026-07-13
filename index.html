@@ -8,11 +8,11 @@
 <style>
   :root{
     --bg:#f6f1e7; --card:#fffdf8; --text:#2b2b2b; --muted:#6b6b6b;
-    --accent:#2e9e6b; --accent-ink:#ffffff; --line:#e7e0d2; --shadow:0 10px 30px rgba(0,0,0,.08);
+    --accent:#ec5f29; --accent-ink:#ffffff; --line:#e7e0d2; --shadow:0 10px 30px rgba(0,0,0,.08);
   }
   @media (prefers-color-scheme: dark){
-    :root{ --bg:#16130f; --card:#211d17; --text:#f2ede3; --muted:#a89f8e;
-      --accent:#4cc389; --accent-ink:#0d0b08; --line:#332c22; --shadow:0 10px 30px rgba(0,0,0,.4);}
+    :root{ --bg:#17130f; --card:#221c16; --text:#f2ede3; --muted:#a89f8e;
+      --accent:#ff7a47; --accent-ink:#1a0f08; --line:#342b22; --shadow:0 10px 30px rgba(0,0,0,.4);}
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
@@ -23,10 +23,8 @@
   }
   .wrap{max-width:720px; margin:0 auto; padding:64px 24px 48px}
   .logo{
-    width:88px;height:88px;border-radius:22px;margin:0 auto 24px;
-    display:flex;align-items:center;justify-content:center;
-    background:linear-gradient(135deg,var(--accent),#7bd6ab);
-    box-shadow:var(--shadow); font-size:44px;
+    width:96px;height:96px;border-radius:22px;margin:0 auto 24px;display:block;
+    box-shadow:var(--shadow);
   }
   h1{font-size:2.4rem; margin:0 0 8px; text-align:center; letter-spacing:-.5px}
   .tag{text-align:center; color:var(--muted); font-size:1.15rem; margin:0 0 32px}
@@ -54,12 +52,12 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="logo">🌱</div>
+    <img class="logo" src="icon.png" alt="Kaizenly app icon" width="96" height="96">
     <h1>Kaizenly</h1>
     <p class="tag">Small habits, big changes. Your daily habit tracker.</p>
 
     <div class="cta">
-      <span class="soon">🌱 Coming soon on Google Play</span>
+      <span class="soon">Coming soon on Google Play</span>
     </div>
 
     <div class="card">
