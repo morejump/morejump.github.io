@@ -2,7 +2,7 @@
 title: Morejump - Android Developer
 description: "A blog about MoreJump ..."
 baseurl: "" # for test: remove string '/space-jekyll-template' to ''
-url: "" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
+url: "https://getkaizenly.com"
 
 # User settings
 username: MoreJump
