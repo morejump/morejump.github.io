@@ -1,0 +1,150 @@
+---
+layout: kaizenly
+permalink: /loop-habit-tracker-import/
+title: "How to import your Loop Habit Tracker history into Kaizenly"
+description: "Move every habit and every day of history out of Loop Habit Tracker without retyping anything. Export the full .db backup from Loop, import it into Kaizenly, and see exactly what carries over and what needs checking."
+---
+
+<p class="crumb"><a href="{{ '/' | absolute_url }}">← Kaizenly</a></p>
+
+<h1 class="left">Import your Loop Habit Tracker history</h1>
+<p class="tag left">Every habit, every check-in, years of it if you have years of it. Two exports,
+one file, about a minute. Nothing to retype.</p>
+
+<div class="card">
+  <h2>Before you start</h2>
+  <p>You need Loop's <strong>full backup</strong> — the <code>.db</code> file. Not the CSV export.
+  The CSV is a readable summary of your check-ins; the <code>.db</code> is the actual database, and
+  it is the only one of the two that carries your schedules, targets and complete history.</p>
+</div>
+
+<div class="card">
+  <h2>Step by step</h2>
+  <ol class="steps">
+    <li>
+      <strong>In Loop Habit Tracker: Settings → Export full backup</strong>
+      Loop writes a file called something like <code>Loop Habits Backup 2026-08-16.db</code> and
+      lets you save or share it. Put it somewhere you can find again — Downloads is fine.
+    </li>
+    <li>
+      <strong>Install Kaizenly and open it</strong>
+      On a fresh install the home screen shows a card reading
+      <em>"Coming from Loop Habit Tracker?"</em> — tap it and you go straight to the file picker.
+    </li>
+    <li>
+      <strong>Already have habits in Kaizenly? Go through Settings instead</strong>
+      <strong style="font-weight:400">Settings → Data backup → Import from Loop.</strong>
+      Because you have data to protect, this route asks whether to add the Loop habits to what you
+      have or replace everything. On an empty app that question never appears — there is nothing to
+      merge with.
+    </li>
+    <li>
+      <strong>Pick the .db file</strong>
+      Loop's export has no registered file type, so the picker shows everything on your device
+      rather than filtering. Choose the <code>.db</code> file by name; Kaizenly checks the contents
+      and will tell you if it isn't a Loop backup.
+    </li>
+    <li>
+      <strong>Read the import report</strong>
+      When it finishes you get a summary of what came in, plus anything worth a second look. The
+      next section explains those.
+    </li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>What carries over</h2>
+  <ul>
+    <li>Every habit, with its name and description</li>
+    <li>Every check-in, back to the first day you logged — the full history, not a summary</li>
+    <li>Numeric habits with their values, not just a tick</li>
+    <li>Schedules: daily, chosen weekdays, and "x times per week" targets</li>
+  </ul>
+  <p style="margin-top:14px">Loop doesn't store an icon per habit, so Kaizenly picks one from the
+  habit's name. Change any that guessed wrong in a couple of taps.</p>
+</div>
+
+<div class="card">
+  <h2>What to check afterwards</h2>
+  <p>Two habit trackers are never a perfect map of each other. Kaizenly imports everything anyway —
+  dropping years of somebody's history to avoid an awkward label is the worse trade — and then names
+  the specific habits you should look at.</p>
+
+  <h3>"At most" habits read backwards</h3>
+  <p>Loop lets you set a limit — <em>smoke at most 5 a day</em> — where staying under the number is
+  the win. Kaizenly has no equivalent yet, so those import as ordinary count-up goals and will read
+  inverted until you edit them.</p>
+
+  <h3>Weekly and monthly targets become daily goals</h3>
+  <p>A Loop habit measured per week, like <em>run 20 km a week</em>, keeps the number 20 but it now
+  means per day. The number is carried across unchanged rather than quietly divided, because
+  dividing produces goals like 2.86 km and hides the change from you.</p>
+
+  <h3>Unusual repeat cycles get rounded</h3>
+  <p>Loop can schedule "every 3 days" or "2 times per 5 days". The closest thing here is a flexible
+  <em>N times per week</em>, so those cadences are approximated.</p>
+
+  <div class="note">
+    <p><strong>Your streak numbers may not match Loop's, and that's expected.</strong> Streaks and
+    consistency are recalculated with Kaizenly's rules rather than copied over. The underlying
+    check-ins are identical — the arithmetic on top of them differs slightly between the two apps.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>If the import is refused</h2>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th>What you see</th>
+        <th>What it means</th>
+      </tr>
+      <tr>
+        <td>"This isn't a Loop backup"</td>
+        <td>The file isn't a Loop database — usually the CSV export, or the wrong file picked from a
+        long list. Go back to Loop and use <strong>Export full backup</strong>.</td>
+      </tr>
+      <tr>
+        <td>"This Loop backup is damaged"</td>
+        <td>The file is a Loop database but incomplete — often a download that stopped early, or a
+        copy taken while Loop was writing. Export a fresh one.</td>
+      </tr>
+      <tr>
+        <td>"This Loop backup has no habits in it"</td>
+        <td>It read fine but is empty. Check you exported from the right device.</td>
+      </tr>
+      <tr>
+        <td>"Couldn't read that file"</td>
+        <td>Nothing is known to be wrong with your file — the device likely ran out of room to copy
+        it. Free some storage and retry.</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Keep your Loop backup</h2>
+  <p>Importing doesn't touch the file, and Loop itself is untouched — it stays installed with all
+  its data until you remove it. Give the new app a couple of weeks before you uninstall anything,
+  and keep that <code>.db</code> somewhere safe regardless. It is the only complete copy of your
+  history that doesn't depend on a phone.</p>
+</div>
+
+<div class="cta left">
+  {% include play-button.html campaign="loop-import" %}
+  <span class="sub">Free on Android. Import from Loop is built in — no converter, no script.</span>
+</div>
+
+<div class="note" style="margin-top:26px">
+  <p>Kaizenly is not affiliated with, endorsed by, or derived from Loop Habit Tracker.
+  Loop is an independent open-source project by Álinson S. Xavier. This page describes reading
+  Loop's own export format so that people who want to move can bring their history with them.</p>
+</div>
+
+<div class="more">
+  <h2>Related</h2>
+  <ul>
+    <li><a href="{{ '/loop-habit-tracker-sync/' | absolute_url }}">Loop sync and backup explained</a></li>
+    <li><a href="{{ '/loop-habit-tracker-widgets/' | absolute_url }}">Loop's widgets vs Kaizenly's</a></li>
+  </ul>
+</div>

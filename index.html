@@ -1,102 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="B7RP-V3zJawPNn0YBkikmkohiT753aYMQyU--xWd8bA" />
-<title>Kaizenly — Daily Habit Tracker</title>
-<meta name="description" content="Kaizenly is a simple, privacy-first daily habit tracker. Small habits, big changes. Build routines, track streaks, and back up privately to your own Google Drive.">
-<style>
-  :root{
-    --bg:#f6f1e7; --card:#fffdf8; --text:#2b2b2b; --muted:#6b6b6b;
-    --accent:#ec5f29; --accent-ink:#ffffff; --line:#e7e0d2; --shadow:0 10px 30px rgba(0,0,0,.08);
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:#17130f; --card:#221c16; --text:#f2ede3; --muted:#a89f8e;
-      --accent:#ff7a47; --accent-ink:#1a0f08; --line:#342b22; --shadow:0 10px 30px rgba(0,0,0,.4);}
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;padding:0}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg); color:var(--text); line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:720px; margin:0 auto; padding:64px 24px 48px}
-  .logo{
-    width:96px;height:96px;border-radius:22px;margin:0 auto 24px;display:block;
-    box-shadow:var(--shadow);
-  }
-  h1{font-size:2.4rem; margin:0 0 8px; text-align:center; letter-spacing:-.5px}
-  .tag{text-align:center; color:var(--muted); font-size:1.15rem; margin:0 0 32px}
-  .card{
-    background:var(--card); border:1px solid var(--line); border-radius:18px;
-    padding:28px; box-shadow:var(--shadow); margin:0 0 22px;
-  }
-  .card h2{font-size:1.15rem; margin:0 0 10px}
-  .card p{margin:0 0 12px; color:var(--text)}
-  .card p:last-child{margin-bottom:0}
-  ul{margin:8px 0 0; padding-left:20px; color:var(--text)}
-  li{margin:4px 0}
-  .cta{text-align:center; margin:8px 0 34px}
-  .soon{
-    display:inline-block; background:var(--card); color:var(--muted);
-    border:1px solid var(--line); font-weight:600; padding:12px 24px;
-    border-radius:999px; font-size:1rem;
-  }
-  .links{text-align:center; margin-top:28px; font-size:.95rem}
-  .links a{color:var(--accent); text-decoration:none; margin:0 10px}
-  .links a:hover{text-decoration:underline}
-  footer{text-align:center; color:var(--muted); font-size:.85rem; margin-top:36px}
-  .badge{color:var(--muted); font-size:.9rem}
-</style>
-</head>
-<body>
-  <div class="wrap">
-    <img class="logo" src="icon.png" alt="Kaizenly app icon" width="96" height="96">
-    <h1>Kaizenly</h1>
-    <p class="tag">Small habits, big changes. Your daily habit tracker.</p>
+---
+layout: kaizenly
+permalink: /
+title: "Kaizenly — Daily Habit Tracker"
+description: "Kaizenly is a simple, privacy-first daily habit tracker for Android. Build routines, keep your streak, and watch progress grow on four home-screen widgets."
+---
 
-    <div class="cta">
-      <span class="soon">Coming soon on Google Play</span>
-    </div>
+<img class="logo" src="{{ '/icon.png' | absolute_url }}" alt="Kaizenly app icon" width="96" height="96">
+<h1>Kaizenly</h1>
+<p class="tag">Small habits, big changes. Your daily habit tracker.</p>
 
-    <div class="card">
-      <h2>What is Kaizenly?</h2>
-      <p>Kaizenly helps you build good habits one day at a time — set daily goals,
-      check off habits, keep your streak alive, and watch your progress grow.
-      It's designed to be simple, calm, and privacy-first.</p>
-    </div>
+<div class="cta">
+  {% include play-button.html campaign="home" %}
+  <span class="sub">Free on Android. Works fully offline.</span>
+</div>
 
-    <div class="card">
-      <h2>Your data stays yours</h2>
-      <p>All of your habits and history are stored locally on your device. There is no
-      account to create and no data kept on our servers.</p>
-      <p>Cloud backup is optional. If you connect Google Drive, Kaizenly requests only the
-      app-data scope (<code>drive.appdata</code>) — a private, hidden folder inside your own
-      Google Drive that no other app, and not even we, can access. You can disconnect or
-      delete your backups at any time.</p>
-    </div>
+<div class="card">
+  <h2>What is Kaizenly?</h2>
+  <p>Kaizenly helps you build good habits one day at a time — set daily goals,
+  check off habits, keep your streak alive, and watch your progress grow.
+  It's designed to be simple, calm, and privacy-first.</p>
+</div>
 
-    <div class="card">
-      <h2>Features</h2>
-      <ul>
-        <li>Daily habits with flexible goals and reminders</li>
-        <li>Streaks, progress rings, and history charts</li>
-        <li>Home-screen widgets</li>
-        <li>Optional private backup to your own Google Drive</li>
-        <li>Works fully offline</li>
-      </ul>
-    </div>
+<div class="card">
+  <h2>Three ways to track, because habits aren't all the same</h2>
+  <ul>
+    <li><strong>Tick it off</strong> — one tap and the day is done, or count up to a target like 8 glasses of water</li>
+    <li><strong>Time it</strong> — a stopwatch runs right on the habit card, for meditation, reading or exercise</li>
+    <li><strong>Enter a number</strong> — log kilometres, pages, calories, or a unit you name yourself</li>
+  </ul>
+</div>
 
-    <div class="links">
-      <a href="https://getkaizenly.com/habit-tracker-privacy/">Privacy Policy &amp; Terms</a>
-      <a href="mailto:luuvanthaoepu@gmail.com">Contact / Support</a>
-    </div>
+<div class="card">
+  <h2>Four home-screen widgets</h2>
+  <p>So your habits stay visible without opening anything.</p>
+  <ul>
+    <li><strong>Progress plant</strong> — a plant that grows as you complete today's habits</li>
+    <li><strong>Single habit</strong> — tick one habit off, or start its timer, in one tap</li>
+    <li><strong>Habit heatmap</strong> — a year of consistency at a glance</li>
+    <li><strong>Trend</strong> — where your progress is heading</li>
+  </ul>
+</div>
 
-    <footer>
-      <p class="badge">© 2026 Kaizenly · Daily Habit Tracker</p>
-    </footer>
-  </div>
-</body>
-</html>
+<div class="card">
+  <h2>Your data stays yours</h2>
+  <p>All of your habits and history are stored locally on your device. There is no
+  account to create and no data kept on our servers.</p>
+  <p>Cloud backup is optional. If you connect Google Drive, Kaizenly requests only the
+  app-data scope (<code>drive.appdata</code>) — a private, hidden folder inside your own
+  Google Drive that no other app, and not even we, can access. You can disconnect or
+  delete your backups at any time.</p>
+</div>
+
+<div class="card">
+  <h2>Coming from Loop Habit Tracker?</h2>
+  <p>Import your Loop backup and bring every habit and every day of history with you.
+  Nothing to retype.</p>
+  <ul>
+    <li><a href="{{ '/loop-habit-tracker-import/' | absolute_url }}">How to import your Loop history</a></li>
+    <li><a href="{{ '/loop-habit-tracker-sync/' | absolute_url }}">Backing up Loop habits to the cloud</a></li>
+    <li><a href="{{ '/loop-habit-tracker-widgets/' | absolute_url }}">Loop's widgets vs Kaizenly's</a></li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>More</h2>
+  <ul>
+    <li>Daily, chosen weekdays, days of the month, or a flexible target like "3 times a week"</li>
+    <li>A time-boxed pause that keeps your history intact, and a monthly budget of skips</li>
+    <li>Streaks, consistency over time, and achievements as milestones land</li>
+    <li>A reminder per habit — mark it done straight from the notification</li>
+    <li>16 languages, light and dark themes, and a day-start hour for night owls</li>
+  </ul>
+</div>

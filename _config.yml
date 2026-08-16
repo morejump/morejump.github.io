@@ -1,21 +1,23 @@
 # Site settings
-title: Morejump - Android Developer
-description: "A blog about MoreJump ..."
-baseurl: "" # for test: remove string '/space-jekyll-template' to ''
+title: Kaizenly
+description: "Kaizenly is a simple, privacy-first daily habit tracker for Android. Small habits, big changes."
 url: "https://getkaizenly.com"
+baseurl: ""
 
 # User settings
-username: MoreJump
-user_title: MoreJump - Android Developer
+username: Kaizenly
+user_title: Kaizenly — Daily Habit Tracker
 email: luuvanthaoepu@gmail.com
-github_username:  morejump
-linkedin_public_url: morejump # Example: For public profile 'www.linkedin.com/in/john-smith', 'john-smith' is your linkedin_public_url
+github_username: morejump
 profile_picture: https://avatars.githubusercontent.com/morejump
 
 # Build settings
 markdown: kramdown
 highlighter: rouge
 permalink: /:title/
+
+plugins:
+  - jekyll-sitemap
 
 # html minify
 compress_html:
@@ -30,29 +32,28 @@ links:
     - title: home
       url: /
       key_trigger: 1
-    - title: about me
-      url: /about
-      key_trigger: 2
   section_2:
-    - title: facebook
-      url: https://www.facebook.com/morejump
-      key_trigger: f
     - title: github
       url: http://www.github.com/morejump
       new_tab: true
       key_trigger: g
-    - title: search
-      url: ""
-      key_trigger: s #WARNING: search only works with "s"
 
-# projects in header index
-projects:
-  - name: MjGenerator
-    url: https://www.npmjs.com/package/mjgenerator
-  - name: My Website
-    url: https://morejump.github.io/
-  - name: VnComparator
-    url: https://github.com/morejump/vncomparator 
-
-# exclude my node related stuff
-exclude: ['package.json', 'src', 'node_modules']
+# Leftovers from the space-jekyll-template this site was built on. None of them
+# are reachable from the product pages any more, and each one Jekyll builds is
+# another thin URL in the sitemap competing with the pages that matter. Delete a
+# line here to bring a page back.
+exclude:
+  - about.html
+  - posts.html
+  - series.html
+  - tags.html
+  - search.json
+  - feed.xml
+  - gulpfile.js
+  - package.json
+  - yarn.lock
+  - screenshot.png
+  - README.md
+  - LICENSE
+  - src
+  - node_modules

@@ -1,0 +1,136 @@
+---
+layout: kaizenly
+permalink: /loop-habit-tracker-sync/
+title: "Loop Habit Tracker sync and backup, explained"
+description: "Loop Habit Tracker has no cloud sync by design — your habits live in one local database. Here's what that means, how to back Loop up properly, and how automatic Google Drive backup works in Kaizenly."
+---
+
+<p class="crumb"><a href="{{ '/' | absolute_url }}">← Kaizenly</a></p>
+
+<h1 class="left">Loop Habit Tracker sync and backup</h1>
+<p class="tag left">Loop keeps everything in one local database on one phone. That is a deliberate
+privacy decision, not a missing feature — but it does mean a lost phone is a lost history.</p>
+
+<div class="card">
+  <h2>Why Loop has no cloud sync</h2>
+  <p>Loop's own store listing is explicit about it: the app "doesn't require an Internet connection
+  or online account registration" and "your confidential data is never sent to anyone." There is no
+  server, so there is nothing to sync to. Everything lives in a SQLite database inside the app's
+  private storage.</p>
+  <p>For a lot of people that is exactly the right trade. The cost only shows up on the day the
+  phone is stolen, wiped, or replaced — and at that point there is no account to sign back into.</p>
+</div>
+
+<div class="card">
+  <h2>How to back Loop up today</h2>
+  <p>Loop can hand you your data, it just won't store it for you. Two exports, and they are not
+  interchangeable:</p>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th>Export</th>
+        <th>What it contains</th>
+        <th>Use it for</th>
+      </tr>
+      <tr>
+        <td><strong>Export full backup</strong><br><code>.db</code></td>
+        <td>The whole database — every habit, every check-in, schedules, targets</td>
+        <td>Restoring Loop, or moving to another app</td>
+      </tr>
+      <tr>
+        <td><strong>Export as CSV</strong></td>
+        <td>Readable tables of your check-ins</td>
+        <td>Spreadsheets and analysis</td>
+      </tr>
+    </table>
+  </div>
+  <div class="note">
+    <p><strong>Do this on a schedule you'll actually keep.</strong> A backup you made once, eight
+    months ago, restores the habits you had eight months ago. Whatever you choose, put a repeating
+    reminder on it — the export is manual and nothing in Loop will nag you.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>What Kaizenly does instead</h2>
+  <p>Kaizenly is also offline-first — no account, and it works with the network off. The difference
+  is that backup is <strong>automatic and optional</strong>: connect Google Drive once, choose daily
+  or weekly, and it writes a backup on its own. Restoring shows you the list of backups to pick
+  from.</p>
+  <p>The Drive permission is the narrow one. Kaizenly asks for the app-data scope
+  (<code>drive.appdata</code>) — a private, hidden folder inside your own Drive. It cannot see your
+  documents or photos, and no other app can see its folder. Disconnect whenever you like; the
+  backups already written stay in your Drive.</p>
+
+  <div class="note">
+    <p><strong>Being precise, because this is where habit apps oversell.</strong> This is scheduled
+    backup and restore — not live two-device sync. Tick a habit on your phone and it does not appear
+    on a tablet a second later. If real-time multi-device sync is what you're after, neither Loop
+    nor Kaizenly is the app for you, and you'll want one with an account and a server behind it.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Side by side</h2>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th></th>
+        <th>Loop Habit Tracker</th>
+        <th>Kaizenly</th>
+      </tr>
+      <tr>
+        <td>Works offline</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Account required</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>Backup</td>
+        <td>Manual export, stored by you</td>
+        <td>Manual, or automatic daily/weekly</td>
+      </tr>
+      <tr>
+        <td>Cloud destination</td>
+        <td>None</td>
+        <td>Your own Google Drive, app-private folder</td>
+      </tr>
+      <tr>
+        <td>Restore</td>
+        <td>Re-import the file you kept</td>
+        <td>Pick from the list of backups</td>
+      </tr>
+      <tr>
+        <td>Live multi-device sync</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Moving over without losing anything</h2>
+  <p>The same <code>.db</code> file you'd use to restore Loop is the file Kaizenly imports. Every
+  habit and every day of history comes across, and the import tells you afterwards what to
+  double-check.</p>
+  <p><a href="{{ '/loop-habit-tracker-import/' | absolute_url }}">Step-by-step: import your Loop
+  history into Kaizenly →</a></p>
+</div>
+
+<div class="cta left">
+  {% include play-button.html campaign="loop-sync" %}
+  <span class="sub">Free on Android. Import from Loop built in.</span>
+</div>
+
+<div class="more">
+  <h2>Related</h2>
+  <ul>
+    <li><a href="{{ '/loop-habit-tracker-import/' | absolute_url }}">Import your Loop Habit Tracker history</a></li>
+    <li><a href="{{ '/loop-habit-tracker-widgets/' | absolute_url }}">Loop's widgets vs Kaizenly's</a></li>
+  </ul>
+</div>

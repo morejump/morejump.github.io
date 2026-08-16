@@ -1,0 +1,15 @@
+{% comment %}
+  Install button. `campaign` tags the link so Play Console's acquisition report
+  can tell which page on this site actually sends installs — without it every
+  install from the site collapses into one undifferentiated "web" bucket.
+  Usage: {% include play-button.html campaign="loop-import" %}
+{% endcomment %}
+<a class="btn" href="https://play.google.com/store/apps/details?id=kaizenly.daily.habit.tracker&amp;utm_source=getkaizenly.com&amp;utm_medium=website&amp;utm_campaign={{ include.campaign | default: 'site' }}">
+  <svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true" focusable="false">
+    <path d="M.7.4A1.8 1.8 0 0 0 .3 1.6v18.8c0 .5.15.9.4 1.2l11-10.6L.7.4z" fill="currentColor" opacity=".95"/>
+    <path d="M15.2 7.3 11.7 5.3 8.2 8.7l3.5 3.4 3.5-2a1.6 1.6 0 0 0 0-2.8z" fill="currentColor" opacity=".75"/>
+    <path d="M.7.4c.35-.4.9-.5 1.5-.15l9.5 5.05-3.5 3.4L.7.4z" fill="currentColor"/>
+    <path d="M.7 21.6c.35.4.9.5 1.5.15l9.5-5.05-3.5-3.4-7.5 8.3z" fill="currentColor" opacity=".55"/>
+  </svg>
+  Get it on Google Play
+</a>

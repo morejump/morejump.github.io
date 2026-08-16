@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="B7RP-V3zJawPNn0YBkikmkohiT753aYMQyU--xWd8bA" />
+
+<title>{{ page.title }}</title>
+<meta name="description" content="{{ page.description }}">
+<link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kaizenly">
+<meta property="og:title" content="{{ page.title }}">
+<meta property="og:description" content="{{ page.description }}">
+<meta property="og:url" content="{{ page.url | replace:'index.html','' | absolute_url }}">
+<meta property="og:image" content="{{ '/icon.png' | absolute_url }}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ page.title }}">
+<meta name="twitter:description" content="{{ page.description }}">
+<meta name="twitter:image" content="{{ '/icon.png' | absolute_url }}">
+
+<meta name="theme-color" content="#ec5f29">
+<link rel="icon" href="{{ '/icon.png' | absolute_url }}" type="image/png">
+<link rel="apple-touch-icon" href="{{ '/icon.png' | absolute_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/kaizenly.css' | absolute_url }}">
+</head>
+<body>
+  <div class="wrap">
+    {{ content }}
+
+    <div class="links">
+      <a href="{{ '/' | absolute_url }}">Home</a>
+      <a href="https://getkaizenly.com/habit-tracker-privacy/">Privacy Policy &amp; Terms</a>
+      <a href="mailto:luuvanthaoepu@gmail.com">Contact / Support</a>
+    </div>
+
+    <footer>
+      <p class="badge">© 2026 Kaizenly · Daily Habit Tracker</p>
+    </footer>
+  </div>
+</body>
+</html>
