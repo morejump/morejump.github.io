@@ -1,0 +1,139 @@
+---
+layout: kaizenly
+permalink: /habit-tracker-widget-android/
+title: "Habit tracker widgets for Android: the maths nobody does"
+description: "Almost every habit tracker widget shows one habit. Track eight and you need eight widgets, which does not fit on a home screen. Here is the arithmetic, the three ways out of it, and how to lay out a home screen you will actually keep."
+---
+
+<p class="crumb"><a href="{{ '/' | absolute_url }}">← Kaizenly</a></p>
+
+<h1 class="left">Habit tracker widgets, and the maths nobody does</h1>
+<p class="tag left">Widgets are the reason a habit tracker works at all — an app you have to remember
+to open is an app you forget. But there is an arithmetic problem in how almost all of them are
+built, and no review mentions it.</p>
+
+<div class="card">
+  <h2>The problem in one line</h2>
+  <p><strong>Nearly every habit widget on Android shows exactly one habit.</strong></p>
+  <p>Loop Habit Tracker is the clearest example, because it is open source and you can go and count.
+  It ships six widget types — Checkmark, History, Score, Frequency, Streak and Target — and every
+  single one is scoped to a single habit. That is not a criticism of Loop; it is the convention in
+  the category.</p>
+  <p>So do the arithmetic. You track eight habits. One widget each is eight widgets. A typical
+  Android home screen is a 4×5 grid, and the smallest useful habit widget is 2×1. Eight of them is
+  16 of your 20 cells, before a clock, before a single app icon.</p>
+  <div class="note">
+    <p><strong>This is why so many people place two widgets, then quietly stop.</strong> Not because
+    widgets do not help — because the design does not scale past about three habits, and nobody
+    tells you that before you start.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>The three ways out</h2>
+
+  <h3>1. A stack that cycles</h3>
+  <p>One slot, several habits, swipe between them. Loop's stack widget does this. It solves the
+  space problem and creates a new one: what is on screen is whichever habit you last swiped to, so
+  the glance-without-thinking property is gone. You are back to interacting with an app, just a
+  smaller one.</p>
+
+  <h3>2. Pick your three</h3>
+  <p>Accept the limit and choose the three habits that most need the nudge. This is the option most
+  people arrive at by accident, and it is genuinely fine — arguably better, since three visible
+  habits beat eight invisible ones. Worth choosing deliberately rather than drifting into.</p>
+
+  <h3>3. One widget for the whole day</h3>
+  <p>Instead of one habit per widget, one widget showing today as a whole. A count, a ring, a
+  plant that grows — the specific metaphor matters less than the property: <strong>fixed size no
+  matter how many habits you track</strong>. Eight habits, twenty habits, same one widget.</p>
+  <p>The trade is precision. A summary tells you that four of eight are done, not which four. In
+  practice that is the right trade, because the job of the widget is to make you open the app on
+  the days you were drifting — not to be the app.</p>
+</div>
+
+<div class="card">
+  <h2>The other thing to check: can you tap it?</h2>
+  <p>There are two kinds of habit widget and the difference is larger than it sounds.</p>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th></th>
+        <th>A chart</th>
+        <th>A control</th>
+      </tr>
+      <tr>
+        <td>What it does</td>
+        <td>Shows a streak, a calendar, a score</td>
+        <td>Marks the habit done, right there</td>
+      </tr>
+      <tr>
+        <td>Taps to log a habit</td>
+        <td>Three — widget, app, habit</td>
+        <td>One</td>
+      </tr>
+      <tr>
+        <td>Good for</td>
+        <td>Reflection, seeing the trend</td>
+        <td>The actual daily loop</td>
+      </tr>
+    </table>
+  </div>
+  <p style="margin-top:14px">Most widget screenshots in store listings are charts, because charts
+  photograph better. Charts are the ones you stop looking at after a fortnight. The widget that
+  earns its space is the one that removes taps on the days you nearly did not bother.</p>
+</div>
+
+<div class="card">
+  <h2>How to lay out a home screen you keep</h2>
+  <ol class="steps">
+    <li>
+      <strong>Start with one summary widget, not five per-habit ones</strong>
+      Put it where your thumb already goes. Its job is to catch the days you are drifting.
+    </li>
+    <li>
+      <strong>Add a control widget for the one habit you keep missing</strong>
+      Not your easiest habit — the one you skip. One tap, no app.
+    </li>
+    <li>
+      <strong>Put the charts on the second screen, or nowhere</strong>
+      Heatmaps and trends are for Sunday, not for Tuesday morning. They do not need prime space.
+    </li>
+    <li>
+      <strong>Give it two weeks, then delete whatever you stopped seeing</strong>
+      A widget you have learned to look past is worse than no widget: it is occupying the spot a
+      useful one could have.
+    </li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>Where Kaizenly sits, and the disclosure</h2>
+  <p><strong>Kaizenly is our app.</strong> It has four widgets, which is fewer than Loop's six, so
+  take the following as description rather than a claim to win on count.</p>
+  <ul>
+    <li><strong>Progress plant</strong> — the whole-day summary from option 3. A plant that grows as
+    today fills up. Same size whether you track three habits or twenty.</li>
+    <li><strong>Single habit</strong> — a control, not a chart. Tick a habit, or start its stopwatch,
+    without opening anything.</li>
+    <li><strong>Habit heatmap</strong> — a year at a glance. A chart, and we would put it on the
+    second screen ourselves.</li>
+    <li><strong>Trend</strong> — where the line is heading. Also a chart.</li>
+  </ul>
+  <p style="margin-top:14px">If you want a per-habit widget for day-of-week frequency or a dedicated
+  streak widget, Loop has those and we do not.
+  <a href="{{ '/loop-habit-tracker-widgets/' | absolute_url }}">The full comparison is here →</a></p>
+</div>
+
+<div class="cta left">
+  {% include play-button.html campaign="widgets-android" %}
+  <span class="sub">Free on Android. Four widgets, one of them for the whole day.</span>
+</div>
+
+<div class="more">
+  <h2>Related</h2>
+  <ul>
+    <li><a href="{{ '/loop-habit-tracker-widgets/' | absolute_url }}">Loop's widgets vs Kaizenly's</a></li>
+    <li><a href="{{ '/free-habit-tracker-app/' | absolute_url }}">Free habit tracker apps and the question nobody asks</a></li>
+  </ul>
+</div>

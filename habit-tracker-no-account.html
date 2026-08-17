@@ -1,0 +1,160 @@
+---
+layout: kaizenly
+permalink: /habit-tracker-no-account/
+title: "Habit trackers with no account: how to tell before you install"
+description: "\"Works offline\" and \"no account required\" are different promises, and a lot of apps make the first while quietly needing the second. Here is what each claim actually means, the airplane-mode test that settles it in two minutes, and where the popular Android trackers stand."
+---
+
+<p class="crumb"><a href="{{ '/' | absolute_url }}">← Kaizenly</a></p>
+
+<h1 class="left">Habit trackers with no account</h1>
+<p class="tag left">Two claims get used interchangeably in store listings and they are not the same
+promise. Knowing the difference takes a minute and saves you from an app that asks for your email
+before it will let you tick anything.</p>
+
+<div class="card">
+  <h2>Three claims that sound identical</h2>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th>Claim</th>
+        <th>What it actually rules out</th>
+        <th>What it still allows</th>
+      </tr>
+      <tr>
+        <td><strong>No account</strong></td>
+        <td>Signing up, handing over an email</td>
+        <td>Sending data out anyway — analytics, crash reports</td>
+      </tr>
+      <tr>
+        <td><strong>Works offline</strong></td>
+        <td>Needing a connection to use it</td>
+        <td>Requiring an account the first time, then caching</td>
+      </tr>
+      <tr>
+        <td><strong>Your data stays on your device</strong></td>
+        <td>Your habits living on someone's server</td>
+        <td>An optional cloud backup you switch on</td>
+      </tr>
+    </table>
+  </div>
+  <p style="margin-top:14px">An app can honestly say "works offline" and still refuse to open until
+  you have made an account, because it only needed the network once. That is the gap most people
+  fall into, and it is invisible until you have installed it.</p>
+</div>
+
+<div class="card">
+  <h2>Why it matters beyond the principle</h2>
+  <p>The obvious reason is privacy, and it is a decent reason. But there are two more practical ones
+  that apply even if you do not care who has your email.</p>
+  <ul>
+    <li><strong>An account is a dependency.</strong> If the company shuts down or the login server
+    breaks, an account-based app can become unusable while your data is still sitting on the phone.
+    An app that never needed a login cannot fail that way.</li>
+    <li><strong>A habit tracker is used in awkward places</strong> — the gym basement, a plane, a
+    train tunnel, roaming with data off. This is the app category where "works offline" is a daily
+    property, not an edge case.</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>The airplane-mode test</h2>
+  <p>Two minutes, and it settles all three claims at once. Do it in this order — the order is what
+  makes it work.</p>
+  <ol class="steps">
+    <li>
+      <strong>Install the app while you still have a connection</strong>
+      Then close it. Do not open it yet.
+    </li>
+    <li>
+      <strong>Turn on airplane mode, then open it for the first time</strong>
+      A first launch with no network is the honest test. Apps that need an account almost always
+      need it here, on the first screen, before they will show you anything.
+    </li>
+    <li>
+      <strong>Create a habit and tick it</strong>
+      If it saves and the checkmark stays, the core loop is genuinely local.
+    </li>
+    <li>
+      <strong>Force-close it, reopen it, still offline</strong>
+      Is the habit still there? Some apps accept input offline and lose it, having only ever held it
+      in memory while waiting for a server.
+    </li>
+    <li>
+      <strong>Now go and look at Settings</strong>
+      Find the analytics switch, if there is one. "No account" and "sends nothing" are, again, two
+      different claims.
+    </li>
+  </ol>
+</div>
+
+<div class="card">
+  <h2>Where the popular Android trackers stand</h2>
+  <p>Taken from each app's own store listing, checked August 2026. Store text is the developer's
+  claim rather than an audit, so run the test above before you commit to one.</p>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th>App</th>
+        <th>What its own listing says</th>
+      </tr>
+      <tr>
+        <td><strong>Loop Habit Tracker</strong></td>
+        <td>The most explicit of any of them: it "doesn't require an Internet connection or online
+        account registration". Open source, so the claim is checkable rather than just stated.</td>
+      </tr>
+      <tr>
+        <td><strong>HabitKit</strong></td>
+        <td>States "No sign-in." plainly in the listing.</td>
+      </tr>
+      <tr>
+        <td><strong>HabitNow</strong></td>
+        <td>Local by default; the cloud backup is opt-in and is the part that involves a Google
+        account.</td>
+      </tr>
+      <tr>
+        <td><strong>Habitify</strong></td>
+        <td>Built around real-time sync across phone, web, desktop and watch. That is the feature,
+        and an account is what makes it possible — worth wanting, but it is the opposite trade.</td>
+      </tr>
+      <tr>
+        <td><strong>Habitica</strong></td>
+        <td>A shared multiplayer game with parties and guilds, so an account is structural rather
+        than incidental.</td>
+      </tr>
+    </table>
+  </div>
+  <p style="margin-top:14px">Notice the pattern: the apps that need an account need it because they
+  are doing something that genuinely requires a server. That is a real trade, not a trick. The
+  question is only whether you are getting the thing you paid the account for.</p>
+</div>
+
+<div class="card">
+  <h2>Where Kaizenly sits, and the disclosure</h2>
+  <p><strong>Kaizenly is our app</strong>, so weigh this accordingly.</p>
+  <ul>
+    <li><strong>No account, ever</strong> — there is no sign-up screen, because there is no server
+    holding your habits.</li>
+    <li><strong>The whole app works offline.</strong> It passes the test above, including step 4.</li>
+    <li><strong>Cloud backup is optional and off until you turn it on.</strong> It writes to your own
+    Google Drive, in the app-private folder — we cannot see your other files, and you can disconnect
+    at any time and keep the backups already written.</li>
+    <li><strong>Analytics is on by default and can be turned off in Settings.</strong> It carries
+    anonymous, aggregate events — never habit names, notes, values or reminder times. We would
+    rather say that plainly here than let "no account" imply "sends nothing", because as the table
+    at the top says, those are different claims.</li>
+  </ul>
+</div>
+
+<div class="cta left">
+  {% include play-button.html campaign="no-account" %}
+  <span class="sub">Free on Android. No sign-up screen, works with the network off.</span>
+</div>
+
+<div class="more">
+  <h2>Related</h2>
+  <ul>
+    <li><a href="{{ '/free-habit-tracker-app/' | absolute_url }}">Free habit tracker apps and the question nobody asks</a></li>
+    <li><a href="{{ '/loop-habit-tracker-sync/' | absolute_url }}">Loop sync and backup explained</a></li>
+  </ul>
+</div>
