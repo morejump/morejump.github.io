@@ -56,6 +56,35 @@ li{margin:6px 0}
 .btn svg{flex:0 0 auto}
 .cta .sub{display:block; color:var(--muted); font-size:.88rem; margin-top:10px}
 
+/* Screenshot strip ------------------------------------------------------
+   A horizontal scroller rather than a grid: six portrait phone shots in a
+   grid on a 720px column are either tiny or a very long page. Bleeds to the
+   viewport edges on the way past, so the cut-off sixth shot is what tells
+   you it scrolls — no arrows, no JS. */
+.shots{
+  display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity;
+  margin:0 -24px 6px; padding:4px 24px 18px;
+  -webkit-overflow-scrolling:touch; scrollbar-width:thin;
+}
+.shot{flex:0 0 232px; scroll-snap-align:center; margin:0}
+.shot img{
+  width:100%; height:auto; display:block; border-radius:16px;
+  border:1px solid var(--line); box-shadow:var(--shadow); background:var(--card);
+}
+.shot figcaption{
+  margin-top:10px; font-size:.86rem; color:var(--muted); text-align:center;
+  line-height:1.4;
+}
+.shots-hint{text-align:center; color:var(--muted); font-size:.82rem; margin:0 0 4px}
+
+/* One screenshot inside a card, for the pages that only need to show one thing. */
+.shot-solo{margin:18px 0 0; text-align:center}
+.shot-solo img{
+  width:100%; max-width:260px; height:auto; border-radius:16px;
+  border:1px solid var(--line); box-shadow:var(--shadow);
+}
+.shot-solo figcaption{margin-top:10px; font-size:.86rem; color:var(--muted)}
+
 /* Callouts ------------------------------------------------------------- */
 .note{
   background:var(--note); border:1px solid var(--note-line);

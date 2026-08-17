@@ -24,6 +24,33 @@
 <link rel="icon" href="{{ '/icon.png' | absolute_url }}" type="image/png">
 <link rel="apple-touch-icon" href="{{ '/icon.png' | absolute_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/kaizenly.css' | absolute_url }}">
+{% if page.app_schema %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Kaizenly",
+  "alternateName": "Kaizenly: Daily Habit Tracker",
+  "description": {{ page.description | jsonify }},
+  "url": {{ '/' | absolute_url | jsonify }},
+  "image": {{ '/icon.png' | absolute_url | jsonify }},
+  "applicationCategory": "LifestyleApplication",
+  "operatingSystem": "Android 7.0+",
+  "installUrl": "https://play.google.com/store/apps/details?id=kaizenly.daily.habit.tracker",
+  "downloadUrl": "https://play.google.com/store/apps/details?id=kaizenly.daily.habit.tracker",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+{% comment %}
+  No aggregateRating on purpose. Google requires a rating that is genuinely visible
+  on the page, and marks up invisible or invented ones as spam. Add it — with the
+  real number shown in the markup next to it — once the Play listing has enough
+  ratings to be worth quoting.
+
+  "price": "0" is true today. The day billing goes live this has to change, or the
+  structured data contradicts the store.
+{% endcomment %}
+{% endif %}
 </head>
 <body>
   <div class="wrap">

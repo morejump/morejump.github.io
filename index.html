@@ -3,6 +3,7 @@ layout: kaizenly
 permalink: /
 title: "Kaizenly — Daily Habit Tracker"
 description: "Kaizenly is a simple, privacy-first daily habit tracker for Android. Build routines, keep your streak, and watch progress grow on four home-screen widgets."
+app_schema: true
 ---
 
 <img class="logo" src="{{ '/icon.png' | absolute_url }}" alt="Kaizenly app icon" width="96" height="96">
@@ -13,6 +14,34 @@ description: "Kaizenly is a simple, privacy-first daily habit tracker for Androi
   {% include play-button.html campaign="home" %}
   <span class="sub">Free on Android. Works fully offline.</span>
 </div>
+
+<div class="shots">
+  <figure class="shot">
+    <img src="{{ '/assets/img/screens/01-home.webp' | absolute_url }}" width="540" height="1105" loading="lazy" decoding="async" alt="Kaizenly home screen showing today's habits, a running timer and a part-filled water counter">
+    <figcaption>Tick it, time it, or log a number</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="{{ '/assets/img/screens/02-widgets.webp' | absolute_url }}" width="540" height="1010" loading="lazy" decoding="async" alt="An Android home screen with all four Kaizenly widgets placed on it">
+    <figcaption>Four widgets on your home screen</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="{{ '/assets/img/screens/03-stats.webp' | absolute_url }}" width="540" height="1105" loading="lazy" decoding="async" alt="Kaizenly statistics screen with a consistency ring, trend line and stat tiles">
+    <figcaption>Consistency, streaks and a whole year</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="{{ '/assets/img/screens/04-detail.webp' | absolute_url }}" width="540" height="1105" loading="lazy" decoding="async" alt="A single habit's detail screen with its trend and a month of completed days">
+    <figcaption>Every habit keeps its own record</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="{{ '/assets/img/screens/05-achievements.webp' | absolute_url }}" width="540" height="1105" loading="lazy" decoding="async" alt="Kaizenly achievements screen with unlocked streak milestone badges">
+    <figcaption>Reach a milestone and it stays yours</figcaption>
+  </figure>
+  <figure class="shot">
+    <img src="{{ '/assets/img/screens/06-start.webp' | absolute_url }}" width="540" height="837" loading="lazy" decoding="async" alt="Kaizenly's empty home screen offering quick-start habits and a Loop Habit Tracker import">
+    <figcaption>34 starters, or bring your history from Loop</figcaption>
+  </figure>
+</div>
+<p class="shots-hint">Scroll for more →</p>
 
 <div class="card">
   <h2>What is Kaizenly?</h2>
@@ -71,4 +100,9 @@ description: "Kaizenly is a simple, privacy-first daily habit tracker for Androi
     <li>A reminder per habit — mark it done straight from the notification</li>
     <li>16 languages, light and dark themes, and a day-start hour for night owls</li>
   </ul>
+</div>
+
+<div class="cta">
+  {% include play-button.html campaign="home-footer" %}
+  <span class="sub">No account. Nothing to sign up for.</span>
 </div>
