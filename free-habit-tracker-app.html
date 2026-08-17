@@ -1,0 +1,190 @@
+---
+layout: kaizenly
+permalink: /free-habit-tracker-app/
+title: "Free habit tracker apps and the question nobody asks"
+description: "Every roundup tells you which habit trackers are free. None tell you whether you can get your history back out. Here's the difference between a backup and an export, why it matters more in this app category than any other, and a 60-second test to run before you commit."
+---
+
+<p class="crumb"><a href="{{ '/' | absolute_url }}">← Kaizenly</a></p>
+
+<h1 class="left">Free habit tracker apps, and the question nobody asks</h1>
+<p class="tag left">Every roundup ranks them by price and features. Almost none answer the one
+question that decides whether "free" was a good deal: on the day you want to leave, can you take
+your history with you?</p>
+
+<div class="card">
+  <h2>Why this matters more here than in other apps</h2>
+  <p>Switching a notes app is annoying. Switching a habit tracker is different, because
+  <strong>the thing you would lose is the entire point of the app</strong>. A 200-day streak is not
+  a file you can retype. It is the product.</p>
+  <p>That creates a trap specific to this category. You pick a free app, you build eight months of
+  history, and then something changes — the free tier shrinks, the app stops being updated, you buy
+  a phone on the other platform. Now the cost of leaving is not the price of a subscription. It is
+  eight months of evidence that you showed up.</p>
+  <p>Which is why "is it free" is the wrong first question. The right one is: <strong>if this app
+  turns out to be wrong for me in a year, what do I walk away with?</strong></p>
+</div>
+
+<div class="card">
+  <h2>A backup is not an export</h2>
+  <p>This is the distinction the marketing blurs, and once you see it you cannot unsee it.</p>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th></th>
+        <th>Backup</th>
+        <th>Export</th>
+      </tr>
+      <tr>
+        <td>What it's for</td>
+        <td>Putting your data back into <em>the same app</em></td>
+        <td>Handing your data to <em>something else</em></td>
+      </tr>
+      <tr>
+        <td>Typical format</td>
+        <td>Whatever the developer chose; often undocumented</td>
+        <td>CSV, JSON, SQLite — something with a public shape</td>
+      </tr>
+      <tr>
+        <td>Tied to</td>
+        <td>An account, a store, or a cloud login</td>
+        <td>A file you hold</td>
+      </tr>
+      <tr>
+        <td>Helps you when</td>
+        <td>You lose your phone</td>
+        <td>You leave</td>
+      </tr>
+    </table>
+  </div>
+  <p style="margin-top:14px">An app can have excellent backup and no meaningful export. That app is
+  safe against a broken phone and completely closed against you changing your mind. Both get
+  advertised with the same word — "your data is safe" — and they are not the same promise.</p>
+</div>
+
+<div class="card">
+  <h2>Three levels of getting out</h2>
+
+  <h3>Level 1 — a file you can read</h3>
+  <p>CSV or JSON. You can open it in a spreadsheet or a text editor and see your dates and your
+  values. Even if no app imports it, your history exists outside the app and a determined person
+  could rebuild it. This is the floor.</p>
+
+  <h3>Level 2 — a complete, structured copy</h3>
+  <p>A full database file rather than a flattened summary. The difference matters: a CSV of
+  check-ins usually loses your schedules, targets and habit settings. A full backup keeps the
+  structure, which is what another app would need to reconstruct the whole thing rather than just
+  the dots on a calendar.</p>
+
+  <h3>Level 3 — something else actually reads it</h3>
+  <p>Rare. This is when a second app can open the first app's file directly, with no converter and
+  no spreadsheet surgery. It only happens when a developer deliberately does the work, because
+  there is no standard format for habit data and nobody is obliged to interoperate.</p>
+
+  <div class="note">
+    <p><strong>Level 1 is the one to insist on.</strong> Levels 2 and 3 are better, but a readable
+    file you hold on your own device is the difference between "I changed apps" and "I started
+    over".</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>The 60-second test, on day one</h2>
+  <p>Do this before you have anything to lose, not after. It takes a minute and it tells you more
+  than any review.</p>
+  <ol class="steps">
+    <li>
+      <strong>Install the app and log two habits for one day</strong>
+      You need a little data in it, but only a little.
+    </li>
+    <li>
+      <strong>Find the export in Settings — and notice how hard it was</strong>
+      If there is only "Backup", that is your answer to the first question. If export sits behind
+      the paywall, that is your answer to a different one.
+    </li>
+    <li>
+      <strong>Export, then actually open the file</strong>
+      Not "it downloaded". Open it. Can you see your two habits and yesterday's date in there?
+    </li>
+    <li>
+      <strong>Send it to yourself</strong>
+      If it will not leave the phone except into that app's own cloud, it is a backup, not an
+      export.
+    </li>
+  </ol>
+  <p style="margin-top:16px">An app that passes this on day one will still pass it on day 400. An
+  app that fails it is one you should only commit to knowing that the history you build there
+  probably stays there.</p>
+</div>
+
+<div class="card">
+  <h2>Where the popular free Android trackers land</h2>
+  <p>Checked August 2026. Treat this as a starting point and re-run the test yourself — pricing and
+  features in this category change often, which is rather the point of the article.</p>
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th>App</th>
+        <th>Getting your history out</th>
+      </tr>
+      <tr>
+        <td><strong>Loop Habit Tracker</strong></td>
+        <td>CSV and a full SQLite backup, both documented, free, no account. The strongest position
+        of any of these, and unsurprising for an open-source app.</td>
+      </tr>
+      <tr>
+        <td><strong>Habitica</strong></td>
+        <td>Data export plus a public API. Built for people who want their data.</td>
+      </tr>
+      <tr>
+        <td><strong>Habitify</strong></td>
+        <td>CSV and a full <code>.sqlite</code> backup. Worth knowing that the API is a paid-plan
+        feature, so programmatic access is not part of the free tier.</td>
+      </tr>
+      <tr>
+        <td><strong>HabitNow</strong></td>
+        <td>Has cloud backup, tied to your Google account and intended for restoring into HabitNow.
+        No published export format, so treat it as backup rather than portability until you have run
+        the test yourself.</td>
+      </tr>
+    </table>
+  </div>
+  <p style="margin-top:14px">Notice that this ranking looks nothing like the usual "best free habit
+  tracker" list. Apps that score badly on features can score brilliantly here, and the reverse.</p>
+</div>
+
+<div class="card">
+  <h2>Where Kaizenly sits, and the disclosure</h2>
+  <p><strong>Kaizenly is our app</strong>, so read this section knowing that. We have put it last
+  and we will keep it factual, because a page arguing you should be able to leave an app would be a
+  poor place to pretend we are neutral.</p>
+  <ul>
+    <li><strong>Export</strong> writes a JSON file you can open in any text editor, and it leaves
+    the phone however you want to send it.</li>
+    <li><strong>Import</strong> takes that same file back, either replacing everything or merging.</li>
+    <li><strong>Cloud backup is optional</strong> and goes to your own Google Drive, in the
+    app-private folder — we cannot see your other files, and you can disconnect and keep the
+    backups already written.</li>
+    <li><strong>It reads Loop Habit Tracker's own backup</strong> — the level 3 case above. Every
+    habit and every check-in comes across from a <code>.db</code> Loop wrote.</li>
+  </ul>
+  <p style="margin-top:14px">That last one is the part we would point at. Writing an importer for a
+  competitor's format is work that only pays off for the user, and it is the clearest signal a habit
+  tracker can give about how it expects to keep you: by being worth staying in.</p>
+  <p><a href="{{ '/loop-habit-tracker-import/' | absolute_url }}">How the Loop import works, step by
+  step →</a></p>
+</div>
+
+<div class="cta left">
+  {% include play-button.html campaign="free-habit-tracker" %}
+  <span class="sub">Free on Android. Works offline, no account.</span>
+</div>
+
+<div class="more">
+  <h2>Related</h2>
+  <ul>
+    <li><a href="{{ '/loop-habit-tracker-import/' | absolute_url }}">Import your Loop Habit Tracker history</a></li>
+    <li><a href="{{ '/loop-habit-tracker-sync/' | absolute_url }}">Loop sync and backup explained</a></li>
+    <li><a href="{{ '/loop-habit-tracker-widgets/' | absolute_url }}">Loop's widgets vs Kaizenly's</a></li>
+  </ul>
+</div>
