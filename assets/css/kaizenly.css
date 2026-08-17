@@ -31,6 +31,19 @@
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
+
+/* Responsive media reset — the one piece of a CSS framework this site actually
+   needed, and the piece it was missing.
+
+   `width`/`height` attributes on an <img> are not just metadata: they map to real
+   CSS declarations. So an <img width="112" height="112"> whose CSS sets only a
+   fluid width ends up 84px wide and still 112px tall, and `aspect-ratio` cannot
+   save it — that property is only consulted when one dimension is `auto`. The app
+   icon shipped as a stretched oval on every screen under 1440px for exactly this
+   reason. `height:auto` hands the height back to the aspect ratio; the attributes
+   stay on the elements, where the browser still uses them to reserve space and
+   avoid layout shift. */
+img,video,canvas{max-width:100%; height:auto}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   background:var(--bg); color:var(--text);

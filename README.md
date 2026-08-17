@@ -63,10 +63,30 @@ for long-form pages. `.wrap.wide` is 1160px for pages that should use the screen
 in front matter. `--gutter` is the single source of truth for side padding; anything that bleeds to
 the viewport edge must offset by exactly that, or the whole page scrolls sideways.
 
-Verified with a headless-Chrome harness that loads every page in an iframe at 320, 360, 390, 412,
-480, 600, 768, 860, 900, 1024, 1280, 1440 and 1920px and asserts no element escapes the viewport.
-Scroll containers are excluded, since they are meant to be wider than their box. Re-run it after
-any layout change — it has caught two real overflow bugs already.
+### Auditing it
+
+```sh
+./tools/audit.sh
+```
+
+Builds the site, loads every page in an iframe at 320, 360, 390, 412, 480, 600, 768, 860, 900,
+1024, 1280, 1440 and 1920px, and fails on two things a screenshot review misses:
+
+- **Horizontal overflow** — any element escaping the viewport, which on a phone means the page can
+  be dragged sideways. Scroll containers are excluded, since they are meant to be wider.
+- **Distorted images** — rendered aspect ratio not matching the file's own.
+
+It discovers pages from the build, so a new page is covered without touching the script. **Run it
+after any layout change.** All three bugs it checks for have shipped here at least once:
+
+| Shipped bug | Caught by |
+|---|---|
+| Screenshot strip bled `-24px` against 18px mobile padding → 6px of page scroll | overflow |
+| Global `table{min-width:420px}` applied to Markdown tables, which are their own scroll container → every blog post scrolled sideways on phones | overflow |
+| `<img height="112">` beat a fluid CSS width, and `aspect-ratio` is ignored when both dimensions are definite → app icon rendered 84×112 | distortion |
+
+To include a blog post in the run, flip `published` on the kitchen-sink fixture (below) to `true`
+temporarily.
 
 ## Adding a blog post
 
