@@ -55,14 +55,31 @@ OUT = ROOT / "assets/img/screens"
 HEIGHT = 1674
 WIDTHS = (360, 720)
 
-# capture stem -> (output name, top offset)
+# capture stem -> (output name, top offset, crop height, required?)
+#
+# The six strip images all share HEIGHT so they tile evenly on the home page. The
+# settings captures are different: they appear one at a time inside a card on an
+# article page, never in a row, so matching the strip's ratio buys nothing — and
+# the Data backup screen runs out of content well before 1674px, which at the
+# shared height would be a slab of empty background.
 SHOTS = [
-    ("home-timer",            "01-home",         100),
-    ("widgets",               "02-widgets",      100),
-    ("stats",                 "03-stats",        100),
-    ("detail",                "04-detail",       100),
-    ("achievements",          "05-achievements", 100),
-    ("template-updated-loop", "06-start",        636),
+    ("home-timer",            "01-home",         100, HEIGHT, True),
+    ("widgets",               "02-widgets",      100, HEIGHT, True),
+    ("stats",                 "03-stats",        100, HEIGHT, True),
+    ("detail",                "04-detail",       100, HEIGHT, True),
+    ("achievements",          "05-achievements", 100, HEIGHT, True),
+    ("template-updated-loop", "06-start",        636, HEIGHT, True),
+
+    # Settings -> Data backup, for the import and sync pages. Optional so the
+    # script still runs before these have been captured; it prints what is
+    # missing rather than failing.
+    #
+    # backup:           taken with the status bar already off, so it starts at 0.
+    # backup-connected: taken with it on, so it starts at 100 like the rest.
+    # Both heights are provisional — check the output and adjust if the crop
+    # lands mid-card.
+    ("backup",           "07-backup",           0, 1320, False),
+    ("backup-connected", "08-backup-connected", 100, 1860, False),
 ]
 
 
@@ -83,23 +100,33 @@ def main():
         f.unlink()
 
     total = 0
-    for stem, name, top in SHOTS:
+    made = 0
+    missing = []
+    for stem, name, top, height, required in SHOTS:
         matches = sorted(src.glob(stem + ".*"))
         if not matches:
-            raise SystemExit(f"Missing capture: {src}/{stem}.*")
+            if required:
+                raise SystemExit(f"Missing capture: {src}/{stem}.*")
+            missing.append(f"{src}/{stem}.png")
+            continue
         im = Image.open(matches[0]).convert("RGB")
-        if top + HEIGHT > im.height:
+        if top + height > im.height:
             raise SystemExit(f"{stem}: crop runs past the bottom of a {im.height}px capture")
-        box = im.crop((0, top, im.width, top + HEIGHT))
+        box = im.crop((0, top, im.width, top + height))
         for w in WIDTHS:
             out = OUT / f"{name}-{w}.webp"
-            box.resize((w, round(HEIGHT * w / im.width)), Image.LANCZOS) \
+            box.resize((w, round(height * w / im.width)), Image.LANCZOS) \
                .save(out, "WEBP", quality=82, method=6)
             total += out.stat().st_size
+            made += 1
+        print(f"  {name:<22} crop 1080x{height}  "
+              f"-> width=\"360\" height=\"{round(height * 360 / 1080)}\"")
 
-    print(f"  {len(SHOTS) * len(WIDTHS)} files, {total // 1024} KB total")
-    print(f"  every image {1080}x{HEIGHT} before resize — "
-          f"use width=\"360\" height=\"{round(HEIGHT * 360 / 1080)}\" on all six")
+    print(f"\n  {made} files, {total // 1024} KB total")
+    if missing:
+        print("  not captured yet (skipped):")
+        for m in missing:
+            print(f"    {m}")
 
 
 if __name__ == "__main__":
