@@ -1,126 +1,107 @@
-# Space Jekyll
+# getkaizenly.com
 
-A simple and elegant Jekyll theme based on Spacemacs. The theme works well on mobile devices as well.
+Source for **getkaizenly.com**, the product site for [Kaizenly](https://play.google.com/store/apps/details?id=kaizenly.daily.habit.tracker),
+an Android habit tracker. Static Jekyll, served by GitHub Pages from `master`.
 
-See a live demo [here](https://victorvoid.github.io/space-jekyll-template/).
+This is a **user site** (`morejump.github.io`) with a custom domain, so the repo name does not match
+the domain and cannot be changed without breaking that.
 
-![](https://github.com/victorvoid/space-jekyll-template/blob/master/screenshot.png?raw=true)
+> **The privacy policy is not in this repo.** `getkaizenly.com/habit-tracker-privacy/` is served
+> from the separate [`habit-tracker-privacy`](https://github.com/morejump/habit-tracker-privacy)
+> repo, as a project page under this user site's domain. Look there, not here, when it needs
+> editing.
 
-# Site/User Settings
+## Pages
 
-customize your site in ``_config.yml``
+| URL | File |
+|---|---|
+| `/` | `index.html` |
+| `/loop-habit-tracker-import/` | `loop-habit-tracker-import.html` |
+| `/loop-habit-tracker-sync/` | `loop-habit-tracker-sync.html` |
+| `/loop-habit-tracker-widgets/` | `loop-habit-tracker-widgets.html` |
+| `/404.html` | `404.html` |
 
-```ruby
+The three `loop-*` pages target search queries people actually type when they are looking to move
+off Loop Habit Tracker. Why those three and not others is written up in the app repo, in
+`docs/marketing-plan.md` — read that before rewriting them, and keep them honest. They deliberately
+admit where Loop is better, because the audience checks.
 
-# Site settings
-description: A blog about lorem ipsum
-baseurl: "" # the subpath
-url: "" # the base hostname &/|| protocol for your site
+## Local preview
 
-# User settings
-username: Lorem Ipsum
-user_description: Lorem Developer
-user_title: Lorem Ipsum
-email: lorem@ipsum.com
-twitter_username: loremipsum
-github_username:  loremipsum
-gplus_username:  loremipsum
-disqus_username: loremipsum
+macOS ships Ruby 2.6, which is too old for current gems. Getting Jekyll 3.10.0 — the version GitHub
+Pages actually runs — installed means pinning five dependencies:
 
+```sh
+export GEM_HOME="$HOME/.gem-jekyll" PATH="$HOME/.gem-jekyll/bin:$PATH"
+gem install --no-document 'json:2.7.6' 'ffi:1.15.5' 'i18n:1.14.8' 'public_suffix:5.1.1'
+gem install --no-document 'jekyll:3.10.0' 'jekyll-sitemap:1.4.0'
 ```
 
-See more about project and links in [_config.yml](./_config.yml)
+Then, from this directory:
 
-## How to create a post ?
-
-_posts create a file .md with structure:
-
-```md
----
-layout: post
-title: "Lorem ipsum speak.."
-date: 2016-09-13 01:00:00
-image: '/assets/img/post-image.png'
-description: 'about tech'
-tags:
-- lorem
-- tech
-categories:
-- Lorem ipsum
-twitter_text: 'How to speak with Lorem'
----
+```sh
+export GEM_HOME="$HOME/.gem-jekyll" PATH="$HOME/.gem-jekyll/bin:$PATH"
+jekyll serve      # http://127.0.0.1:4000
 ```
 
-## How to insert new links on menu navigation ?
+A plain `gem install jekyll` fails on `ffi` requiring Ruby >= 3.0. Don't retry it — either use the
+pins above or install a modern Ruby first.
 
-![](https://github.com/victorvoid/space-jekyll-template/blob/master/src/img/menu.png)
+## Adding a page
 
-You should open `_config.yml` and change/add `links` section:
+Front matter, then plain HTML. No Markdown needed, no layout boilerplate:
 
 ```yaml
-links:
-  section_1: # you can use any name
-    - title: home # show on menu
-      url: / #link
-      key_trigger: 1 # link shortcut and show on the left of the title
-    - title: my posts
-      url: /posts
-      key_trigger: 2
-    - title: series
-      url: /series
-      key_trigger: 3
-    - title: tags
-      url: /tags
-      key_trigger: 4
-    - title: about me
-      url: /about
-      key_trigger: 5
+---
+layout: kaizenly
+permalink: /some-page/
+title: "Under 60 characters, keyword first"
+description: "One or two sentences. This is the search snippet, so write it for a human."
+---
 ```
 
-Frontend Technologies
----------------------
-* [Gulp](https://gulpjs.com/): The streaming build system.
-* [Stylus](http://stylus-lang.com/): expressive, dynamic, robust CSS.
-* [BrowserSync](https://www.browsersync.io/): Time-saving synchronised browser testing.
-* [Rupture](https://github.com/jescalan/rupture): Simple media queries for stylus.
-* [Kouto-Swiss](http://kouto-swiss.io/): A complete CSS framework for Stylus.
-* [Jeet](http://jeet.gs/): A grid system for human.
-* [Zepto.js](http://zeptojs.com/): The aerogel-weight jQuery-compatible JavaScript library.
+`_layouts/kaizenly.html` supplies the head — title, description, canonical, Open Graph, Twitter
+card — all from that front matter. `assets/css/kaizenly.css` holds every style the product pages
+use. New pages land in `sitemap.xml` automatically.
 
-## How can I modify the theme ?
+Install links go through the include, never hand-written:
 
-First, install [jekyll](https://jekyllrb.com/) and [node.js](https://nodejs.org/).
+```liquid
+{% include play-button.html campaign="some-page" %}
+```
 
-1. Fork the theme with your username, example: `charlie.github.io`
-2. Clone repository to your computer
-3. run `npm install`
-4. run `gulp`
-5. Be happy by modifying the files
+The `campaign` becomes a `utm_campaign` on the Play URL, which is the only way Play Console can tell
+which page actually produced an install. A hand-written link throws that away.
 
-**Space Jekyll** uses the [Stylus](http://stylus-lang.com/) to process his css, then modifies the style of the theme in [this folder](https://github.com/victorvoid/space-jekyll-template/tree/master/src/styl).
+## Theme leftovers
 
-You can go in the [variable.styl](https://github.com/victorvoid/space-jekyll-template/blob/master/src/styl/_variables.styl) and modify the colors. 
+This started as the [Space Jekyll](https://github.com/victorvoid/space-jekyll-template) blog
+template and a lot of it is still on disk. The blog machinery — `about.html`, `posts.html`,
+`series.html`, `tags.html`, `search.json`, `feed.xml` — is listed under `exclude:` in `_config.yml`
+so Jekyll doesn't build it. Each one it built was another thin URL competing with the real pages.
+Delete a line from `exclude:` to bring one back.
 
+Still live but unused by the product pages: `_layouts/default.html`, `_layouts/post.html`,
+`_includes/head.html` (its favicon paths point at a directory that doesn't exist),
+`assets/css/main.css`, and the Gulp/Stylus pipeline in `src/` with `gulpfile.js`. Left in place
+rather than deleted, so the theme pages still work if any are ever re-enabled.
 
-## License
-The MIT License (MIT)
+## Things worth knowing before changing something
 
-Copyright (c) 2016 Victor Igor
+- **Don't put a payment flow or a web version of the app on this domain.** GitHub Pages' terms
+  forbid using it for a site "primarily directed at either facilitating commercial transactions or
+  providing commercial software as a service". A marketing page linking to Play is fine; a
+  subscription checkout is the line. Move hosting *before* that ships.
+- **Google Pages can't do server-side 301s.** Changing a published URL means it just breaks unless
+  you add `jekyll-redirect-from`, which only manages a meta refresh. Pick permalinks you can live
+  with.
+- **Only allowlisted Jekyll plugins run** unless the build moves to GitHub Actions. `jekyll-polyglot`
+  is not on the list, so multi-language would mean manual `/vi/` folders plus hreflang.
+- **`CNAME` must stay.** Deleting it drops the custom domain and sends everything back to
+  `morejump.github.io`.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+## Credits and licence
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+Built on [Space Jekyll](https://github.com/victorvoid/space-jekyll-template) by Victor Igor, MIT
+licensed — see [LICENSE](LICENSE). The layouts, includes, `assets/css/main.css` and `src/` are still
+his work. Kaizenly's own pages, `_layouts/kaizenly.html` and `assets/css/kaizenly.css` are not.
