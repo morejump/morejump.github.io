@@ -154,6 +154,40 @@ li{margin:.35em 0}
   .wide .shots-hint{display:none}
 }
 
+/* Two screenshots side by side, for showing a pair that only makes sense together
+   — two routes to the same screen, or a before and after. Wraps to a stack when
+   there isn't room for two, which on a phone is always. */
+.shot-pair{
+  display:flex; flex-wrap:wrap; gap:clamp(16px, 2vw, 28px);
+  justify-content:center; align-items:flex-start; margin:20px 0 0;
+}
+.shot-pair figure{flex:1 1 230px; max-width:300px; margin:0; text-align:center}
+.shot-pair img{
+  width:100%; height:auto; border-radius:16px;
+  border:1px solid var(--line); box-shadow:var(--shadow);
+}
+/* Side by side, match on HEIGHT rather than width. The two are different screens
+   with different aspect ratios, so equal widths leave one shorter than the other
+   and their captions land on different lines. Equal heights puts the captions on
+   one baseline; the widths differing is the part nobody notices. Only once there
+   is room for two — stacked on a phone they go back to full width, because a
+   fixed height plus a capped width is how you distort an image. */
+@media (min-width:620px){
+  /* Nothing here may cap the image's WIDTH, because its height is fixed and a
+     capped width against a fixed height is a squashed image, not a smaller one.
+     An earlier attempt put max-width:46% on the figure; at 1280px that is 291px
+     against an image that wants 300, and it shipped a 3% horizontal squash that
+     no eye would catch. tools/audit.sh did.
+     So the height is the only constraint, max-width:none takes the global reset
+     out of the way, and the caption is bounded in ch units so a long line cannot
+     stretch the figure either. Too wide for one row and the flex container wraps,
+     which is the correct outcome. */
+  .shot-pair figure{flex:0 0 auto; max-width:none}
+  .shot-pair img{width:auto; height:clamp(300px, 33vw, 400px); max-width:none}
+  .shot-pair figcaption{max-width:30ch; margin-inline:auto}
+}
+.shot-pair figcaption{margin-top:10px; font-size:.86rem; color:var(--muted); line-height:1.4}
+
 /* One screenshot inside a card, for pages that only need to show one thing. */
 .shot-solo{margin:20px 0 0; text-align:center}
 .shot-solo img{

@@ -71,15 +71,21 @@ SHOTS = [
     ("template-updated-loop", "06-start",        636, HEIGHT, True),
 
     # Settings -> Data backup, for the import and sync pages. Optional so the
-    # script still runs before these have been captured; it prints what is
-    # missing rather than failing.
+    # script still runs before these have been captured.
     #
-    # backup:           taken with the status bar already off, so it starts at 0.
-    # backup-connected: taken with it on, so it starts at 100 like the rest.
-    # Both heights are provisional — check the output and adjust if the crop
-    # lands mid-card.
-    ("backup",           "07-backup",           0, 1320, False),
-    ("backup-connected", "08-backup-connected", 100, 1860, False),
+    # Bounds measured off the pixels rather than eyeballed, by scanning each row
+    # for anything that is not the page background:
+    #
+    #   backup            no status bar in the capture; content ends at y=1540,
+    #                     so the crop closes at 1570 for the same 30px of breathing
+    #                     room the other one gets. Top starts at 126 so the header
+    #                     sits the same distance from the edge in both.
+    #   backup-connected  status bar occupies y=40-80 with a gap to 140, so 130
+    #                     clears it. "Restore from Drive" ends at y=2260 and the
+    #                     next card starts at 2300 — closing at 2290 lands in that
+    #                     gap and drops both the half-card and the nav bar.
+    ("backup",           "07-backup",           126, 1444, False),
+    ("backup-connected", "08-backup-connected", 130, 2160, False),
 ]
 
 

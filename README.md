@@ -84,6 +84,9 @@ after any layout change.** All three bugs it checks for have shipped here at lea
 | Screenshot strip bled `-24px` against 18px mobile padding → 6px of page scroll | overflow |
 | Global `table{min-width:420px}` applied to Markdown tables, which are their own scroll container → every blog post scrolled sideways on phones | overflow |
 | `<img height="112">` beat a fluid CSS width, and `aspect-ratio` is ignored when both dimensions are definite → app icon rendered 84×112 | distortion |
+| A `max-width` percentage capping an image whose height was fixed → 3% horizontal squash at three widths, invisible by eye | distortion |
+
+The lesson in the last two: **never constrain both dimensions of an image.** Fix one, let the other follow.
 
 To include a blog post in the run, flip `published` on the kitchen-sink fixture (below) to `true`
 temporarily.
