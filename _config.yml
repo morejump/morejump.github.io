@@ -14,7 +14,9 @@ profile_picture: https://avatars.githubusercontent.com/morejump
 # Build settings
 markdown: kramdown
 highlighter: rouge
-permalink: /:title/
+# Posts live under /blog/ so they can never collide with a hand-built page at the
+# root, and so the section reads as a section.
+permalink: /blog/:title/
 
 plugins:
   - jekyll-sitemap

@@ -1,76 +1,128 @@
 /* Kaizenly product site.
-   Lifted out of index.html so the landing pages share one look instead of
-   four copies of the same inline <style> drifting apart. */
+
+   The layout is fluid rather than a stack of breakpoints. Sizes are clamp()ed
+   between a phone value and a desktop value and interpolate with the viewport, so
+   there is no width at which the page is "between" designs. Only two real
+   breakpoints remain, and both change layout *mode* rather than size:
+
+     860px  one column becomes two, and the screenshot scroller becomes a grid
+     520px  touch affordances — stacked footer links, breakable filenames
+
+   Two container widths, because they answer different questions. Long-form pages
+   want a measure you can read (~70 characters); the home page wants to use the
+   screen. `.wrap` is the reading column; `.wrap.wide` is the full-bleed one. */
 
 :root{
   --bg:#f6f1e7; --card:#fffdf8; --text:#2b2b2b; --muted:#6b6b6b;
   --accent:#ec5f29; --accent-ink:#ffffff; --line:#e7e0d2;
   --shadow:0 10px 30px rgba(0,0,0,.08);
   --note:#fdf4ec; --note-line:#f0d9c4;
+  /* --card with zero alpha. Fading to `transparent` fades through transparent
+     BLACK in Safari and leaves a grey smear. */
+  --card-0:rgba(255,253,248,0);
 }
 @media (prefers-color-scheme: dark){
   :root{ --bg:#17130f; --card:#221c16; --text:#f2ede3; --muted:#a89f8e;
     --accent:#ff7a47; --accent-ink:#1a0f08; --line:#342b22;
     --shadow:0 10px 30px rgba(0,0,0,.4);
-    --note:#2a2018; --note-line:#453424; }
+    --note:#2a2018; --note-line:#453424;
+    --card-0:rgba(34,28,22,0); }
 }
 
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  background:var(--bg); color:var(--text); line-height:1.6;
+  background:var(--bg); color:var(--text);
+  font-size:clamp(1rem, .97rem + .16vw, 1.075rem);
+  line-height:1.62;
   -webkit-font-smoothing:antialiased;
 }
 
-/* --gutter is the single source of truth for the page's side padding. Anything that
-   bleeds to the viewport edge must offset by exactly this, or it overflows the body
-   and the whole page scrolls sideways — which is what happened when the screenshot
-   strip hard-coded -24px against the 18px mobile padding. */
-.wrap{--gutter:24px; max-width:720px; margin:0 auto; padding:64px var(--gutter) 48px}
-.logo{width:96px;height:96px;border-radius:22px;margin:0 auto 24px;display:block;box-shadow:var(--shadow)}
-.logo-sm{width:44px;height:44px;border-radius:11px;vertical-align:middle;margin-right:10px}
+/* Containers ------------------------------------------------------------
+   --gutter is the single source of truth for side padding. Anything that bleeds
+   to the viewport edge offsets by exactly this, or it overflows the body and the
+   whole page scrolls sideways. */
+.wrap{
+  --gutter:clamp(18px, 4vw, 32px);
+  --maxw:760px;
+  max-width:var(--maxw); margin:0 auto;
+  padding:clamp(40px, 6vw, 76px) var(--gutter) clamp(36px, 5vw, 60px);
+}
+.wrap.wide{--maxw:1160px}
 
-h1{font-size:2.4rem; margin:0 0 8px; text-align:center; letter-spacing:-.5px}
-h1.left{text-align:left; font-size:2.1rem; line-height:1.2; margin-bottom:14px}
-.tag{text-align:center; color:var(--muted); font-size:1.15rem; margin:0 0 32px}
-.tag.left{text-align:left; font-size:1.1rem; margin-bottom:28px}
+/* Hero text keeps a readable measure even when the container is 1160px wide —
+   a centred sentence running the full width of a desktop screen is unreadable. */
+.hero{max-width:660px; margin-inline:auto}
 
+.logo{
+  width:clamp(84px, 8vw, 112px); aspect-ratio:1; border-radius:22%;
+  margin:0 auto clamp(18px, 2vw, 26px); display:block; box-shadow:var(--shadow);
+}
+
+h1{
+  font-size:clamp(2.1rem, 1.5rem + 2.5vw, 3.4rem);
+  line-height:1.1; margin:0 0 .3em; text-align:center; letter-spacing:-.02em;
+}
+h1.left{
+  text-align:left; font-size:clamp(1.8rem, 1.35rem + 1.8vw, 2.7rem);
+  margin-bottom:.4em;
+}
+.tag{
+  text-align:center; color:var(--muted); margin:0 0 clamp(26px, 3vw, 38px);
+  font-size:clamp(1.05rem, 1rem + .4vw, 1.3rem);
+}
+.tag.left{text-align:left; max-width:62ch}
+
+/* Cards ----------------------------------------------------------------- */
 .card{
   background:var(--card); border:1px solid var(--line); border-radius:18px;
-  padding:28px; box-shadow:var(--shadow); margin:0 0 22px;
+  padding:clamp(22px, 2.4vw, 32px); box-shadow:var(--shadow); margin:0 0 22px;
 }
-.card h2{font-size:1.15rem; margin:0 0 10px}
-.card h3{font-size:1rem; margin:20px 0 6px}
-.card p{margin:0 0 12px}
+.card h2{font-size:clamp(1.1rem, 1.04rem + .28vw, 1.32rem); margin:0 0 .5em}
+.card h3{font-size:1.02rem; margin:1.3em 0 .35em}
+.card p{margin:0 0 .75em}
 .card p:last-child{margin-bottom:0}
-ul,ol{margin:8px 0 0; padding-left:20px}
-li{margin:6px 0}
+ul,ol{margin:.5em 0 0; padding-left:1.25em}
+li{margin:.35em 0}
 
-/* Call to action ------------------------------------------------------- */
-.cta{text-align:center; margin:8px 0 34px}
+/* On a wide screen a single column of cards wastes half the viewport, so they
+   pair up. align-items:start keeps a short card short instead of stretching it
+   to match its neighbour. */
+.cards{display:grid; gap:22px; align-items:start}
+.cards > .card{margin:0}
+@media (min-width:860px){
+  .wide .cards{grid-template-columns:1fr 1fr}
+  .wide .cards > .span2{grid-column:1 / -1}
+  .wide .span2 ul{columns:2; column-gap:36px}
+  .wide .span2 li{break-inside:avoid}
+}
+
+/* Call to action -------------------------------------------------------- */
+.cta{text-align:center; margin:clamp(8px,1vw,14px) 0 clamp(28px,3.5vw,44px)}
 .cta.left{text-align:left}
 .btn{
   display:inline-flex; align-items:center; gap:10px;
   background:var(--accent); color:var(--accent-ink); text-decoration:none;
-  font-weight:600; font-size:1.02rem; padding:14px 26px; border-radius:999px;
+  font-weight:600; font-size:clamp(1rem, .96rem + .2vw, 1.12rem);
+  padding:clamp(13px,1.3vw,17px) clamp(24px,2.4vw,32px); border-radius:999px;
   box-shadow:var(--shadow); transition:transform .12s ease, filter .12s ease;
 }
 .btn:hover{transform:translateY(-1px); filter:brightness(1.06)}
 .btn svg{flex:0 0 auto}
-.cta .sub{display:block; color:var(--muted); font-size:.88rem; margin-top:10px}
+.cta .sub{display:block; color:var(--muted); font-size:.9rem; margin-top:10px}
 
-/* Screenshot strip ------------------------------------------------------
-   A horizontal scroller rather than a grid: six portrait phone shots in a
-   grid on a 720px column are either tiny or a very long page. Bleeds to the
-   viewport edges on the way past, so the cut-off sixth shot is what tells
-   you it scrolls — no arrows, no JS. */
+/* Screenshots -----------------------------------------------------------
+   Phone: a horizontal scroller that bleeds to both edges, so the clipped second
+   card is what tells you it scrolls — no arrows, no JS.
+   Desktop: a real grid, because a scroller that hides four of six screenshots on
+   a 1440px screen is hiding them for no reason. */
 .shots{
   display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity;
   margin:0 calc(-1 * var(--gutter)) 6px; padding:4px var(--gutter) 18px;
   -webkit-overflow-scrolling:touch; scrollbar-width:thin;
 }
-.shot{flex:0 0 232px; scroll-snap-align:center; margin:0}
+.shot{flex:0 0 min(232px, 68vw); scroll-snap-align:center; margin:0}
 .shot img{
   width:100%; height:auto; display:block; border-radius:16px;
   border:1px solid var(--line); box-shadow:var(--shadow); background:var(--card);
@@ -80,31 +132,35 @@ li{margin:6px 0}
   line-height:1.4;
 }
 .shots-hint{text-align:center; color:var(--muted); font-size:.82rem; margin:0 0 4px}
+@media (min-width:860px){
+  .wide .shots{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:clamp(20px, 2.2vw, 32px);
+    overflow:visible; margin:0 0 8px; padding:4px 0 0;
+  }
+  .wide .shot{flex:none; width:auto}
+  .wide .shots-hint{display:none}
+}
 
-/* One screenshot inside a card, for the pages that only need to show one thing. */
-.shot-solo{margin:18px 0 0; text-align:center}
+/* One screenshot inside a card, for pages that only need to show one thing. */
+.shot-solo{margin:20px 0 0; text-align:center}
 .shot-solo img{
-  width:100%; max-width:260px; height:auto; border-radius:16px;
+  width:100%; max-width:clamp(240px, 26vw, 320px); height:auto; border-radius:16px;
   border:1px solid var(--line); box-shadow:var(--shadow);
 }
 .shot-solo figcaption{margin-top:10px; font-size:.86rem; color:var(--muted)}
 
-/* Callouts ------------------------------------------------------------- */
+/* Callouts -------------------------------------------------------------- */
 .note{
   background:var(--note); border:1px solid var(--note-line);
-  border-radius:12px; padding:16px 18px; margin:16px 0 0;
-  font-size:.95rem;
+  border-radius:12px; padding:16px 18px; margin:16px 0 0; font-size:.96rem;
 }
 .note strong{color:var(--accent)}
 .note p{margin:0 0 8px}
 .note p:last-child{margin-bottom:0}
 
-/* Numbered how-to ------------------------------------------------------ */
+/* Numbered how-to ------------------------------------------------------- */
 .steps{counter-reset:step; list-style:none; padding:0; margin:14px 0 0}
-.steps li{
-  counter-increment:step; position:relative;
-  padding-left:44px; margin:0 0 18px; min-height:32px;
-}
+.steps li{counter-increment:step; position:relative; padding-left:44px; margin:0 0 18px; min-height:32px}
 .steps li:last-child{margin-bottom:0}
 .steps li::before{
   content:counter(step); position:absolute; left:0; top:0;
@@ -115,11 +171,35 @@ li{margin:6px 0}
 }
 .steps strong{display:block}
 
-/* Comparison table ----------------------------------------------------- */
-.tablewrap{overflow-x:auto; margin:16px 0 0; -webkit-overflow-scrolling:touch}
-table{border-collapse:collapse; width:100%; font-size:.94rem; min-width:420px}
+/* Tables ----------------------------------------------------------------
+   Wider than a phone, so they scroll inside this box — but a cut-off table looks
+   like a table that simply ends, and nobody swipes something they don't know is
+   there. The four layers are the scroll-shadow trick: two opaque covers in the
+   card colour attached `local` so they travel with the content, over two shadows
+   attached `scroll` so they stay pinned to the box. At the left edge the cover
+   sits on the shadow and hides it; scroll and the cover moves away, revealing it.
+   No JavaScript, and unlike a static gradient it hides itself at both ends and
+   never appears at all on a screen wide enough to fit the table. */
+.tablewrap{
+  overflow-x:auto; margin:16px 0 0; -webkit-overflow-scrolling:touch;
+  background:
+    linear-gradient(to right, var(--card) 40%, var(--card-0)) left center,
+    linear-gradient(to left,  var(--card) 40%, var(--card-0)) right center,
+    radial-gradient(farthest-side at 0 50%,    rgba(0,0,0,.16), rgba(0,0,0,0)) left center,
+    radial-gradient(farthest-side at 100% 50%, rgba(0,0,0,.16), rgba(0,0,0,0)) right center;
+  background-repeat:no-repeat;
+  background-size:44px 100%, 44px 100%, 15px 100%, 15px 100%;
+  background-attachment:local, local, scroll, scroll;
+}
+table{border-collapse:collapse; width:100%; font-size:.95rem}
+/* Only tables that sit in a .tablewrap get a floor — the wrapper is the scroll
+   container, so forcing the table past the viewport is what makes it scroll
+   instead of cramming three columns into 280px. A Markdown table has no wrapper
+   and is its own scroll container, so the same floor there would push the whole
+   page sideways instead. That bug shipped once; hence the two separate rules. */
+.tablewrap table{min-width:420px}
 th,td{text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top}
-th{font-weight:600; color:var(--muted); font-size:.85rem; text-transform:uppercase; letter-spacing:.03em}
+th{font-weight:600; color:var(--muted); font-size:.82rem; text-transform:uppercase; letter-spacing:.04em}
 tr:last-child td{border-bottom:none}
 
 code{
@@ -127,35 +207,111 @@ code{
   padding:1px 6px; font-size:.9em;
 }
 
-/* Navigation ----------------------------------------------------------- */
+/* Prose -----------------------------------------------------------------
+   Everything above styles hand-built pages, where each block gets a class. A
+   Markdown post gets none — kramdown emits bare h2/p/ul/blockquote/pre — so this
+   block styles those elements directly, scoped to .prose so it can never leak
+   into the hand-built pages. Add a post and it is typeset with no extra classes.
+
+   Scoped by element rather than class on purpose: the whole point is that the
+   author writes Markdown and never thinks about this file. */
+.prose{max-width:70ch}
+.prose > * + *{margin-top:1.1em}
+.prose h2{
+  font-size:clamp(1.35rem, 1.2rem + .7vw, 1.75rem);
+  line-height:1.25; letter-spacing:-.01em; margin-top:1.9em; margin-bottom:.5em;
+}
+.prose h3{font-size:clamp(1.12rem, 1.05rem + .35vw, 1.3rem); margin-top:1.6em; margin-bottom:.4em}
+.prose h4{font-size:1.02rem; margin-top:1.4em; margin-bottom:.3em; color:var(--muted)}
+.prose h2:first-child, .prose h3:first-child{margin-top:0}
+.prose p{margin:0}
+.prose a{color:var(--accent); text-decoration:underline; text-underline-offset:2px}
+.prose ul, .prose ol{padding-left:1.3em}
+.prose li + li{margin-top:.3em}
+.prose li > ul, .prose li > ol{margin-top:.3em}
+.prose blockquote{
+  margin:1.4em 0; padding:2px 0 2px 18px; border-left:3px solid var(--accent);
+  color:var(--muted); font-style:italic;
+}
+.prose blockquote p + p{margin-top:.7em}
+.prose img{
+  max-width:100%; height:auto; display:block; border-radius:14px;
+  border:1px solid var(--line);
+}
+.prose figure{margin:1.6em 0}
+.prose figcaption{margin-top:.6em; font-size:.86rem; color:var(--muted); text-align:center}
+.prose hr{border:0; border-top:1px solid var(--line); margin:2.4em 0}
+/* A code block cannot wrap without changing what the code means, so it scrolls
+   inside itself. Without this a single long line drags the whole page sideways. */
+.prose pre{
+  overflow-x:auto; -webkit-overflow-scrolling:touch;
+  background:var(--card); border:1px solid var(--line); border-radius:12px;
+  padding:16px 18px; font-size:.88rem; line-height:1.5; margin:1.4em 0;
+}
+.prose pre code{background:none; border:0; padding:0; font-size:inherit}
+/* kramdown emits a bare <table> with no wrapper to hang overflow on, so the table
+   itself becomes the scroll container. */
+.prose table{
+  display:block; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  width:100%; max-width:max-content; min-width:0; margin:1.4em 0;
+}
+.prose kbd{
+  background:var(--bg); border:1px solid var(--line); border-bottom-width:2px;
+  border-radius:5px; padding:1px 6px; font-size:.85em;
+}
+
+/* Post list and post meta ----------------------------------------------- */
+.postmeta{color:var(--muted); font-size:.9rem; margin:0 0 clamp(22px,2.5vw,32px)}
+.postmeta time + span::before{content:"·"; margin:0 .5em}
+
+.postlist{display:grid; gap:20px; align-items:start; margin-top:clamp(20px,2.5vw,30px)}
+@media (min-width:860px){ .wide .postlist{grid-template-columns:1fr 1fr} }
+.postlist article{
+  background:var(--card); border:1px solid var(--line); border-radius:18px;
+  padding:clamp(20px,2.2vw,28px); box-shadow:var(--shadow);
+}
+.postlist h2{font-size:clamp(1.1rem,1.04rem + .3vw,1.3rem); margin:0 0 .35em; line-height:1.3}
+.postlist h2 a{color:var(--text); text-decoration:none}
+.postlist h2 a:hover{color:var(--accent)}
+.postlist .postmeta{margin:0 0 .6em}
+.postlist p{margin:0}
+
+.pagination{
+  display:flex; justify-content:center; align-items:center; gap:18px;
+  margin-top:clamp(26px,3vw,38px); font-size:.95rem;
+}
+.pagination a{color:var(--accent); text-decoration:none}
+.pagination a:hover{text-decoration:underline}
+.pagination .current{color:var(--muted)}
+
+/* Navigation ------------------------------------------------------------ */
 .crumb{margin:0 0 22px; font-size:.92rem}
 .crumb a{color:var(--muted); text-decoration:none}
 .crumb a:hover{color:var(--accent); text-decoration:underline}
 
-.links{text-align:center; margin-top:28px; font-size:.95rem}
+.links{text-align:center; margin-top:clamp(24px,3vw,36px); font-size:.95rem}
 .links a{color:var(--accent); text-decoration:none; margin:0 10px}
 .links a:hover{text-decoration:underline}
 
-.more{margin-top:30px}
+.more{margin-top:clamp(26px,3vw,38px)}
 .more h2{font-size:1rem; color:var(--muted); margin:0 0 12px; text-align:center}
 .more ul{list-style:none; padding:0; margin:0; text-align:center}
 .more li{margin:6px 0}
 .more a{color:var(--accent); text-decoration:none}
 .more a:hover{text-decoration:underline}
 
-footer{text-align:center; color:var(--muted); font-size:.85rem; margin-top:36px}
+footer{text-align:center; color:var(--muted); font-size:.85rem; margin-top:clamp(28px,3vw,40px)}
 .badge{color:var(--muted); font-size:.9rem}
 
+/* Touch ----------------------------------------------------------------- */
 @media (max-width:520px){
-  .wrap{--gutter:18px; padding:40px var(--gutter) 36px}
-  h1{font-size:2rem}
-  h1.left{font-size:1.75rem}
-  .card{padding:22px 20px}
-  /* Footer links stack instead of crowding onto one line, and each one gets a
-     touch target with room around it rather than a 10px margin. */
+  /* Footer links stack with real touch targets instead of crowding one line. */
   .links a{display:inline-block; padding:8px 10px; margin:2px 0}
-  /* A long unbroken filename — "Loop Habits Backup 2026-08-16.db" — is wider than
-     a 320px phone and would push the card out on its own. */
+  /* A long unbroken filename is wider than a 320px phone and would push its
+     card out on its own. */
   code{overflow-wrap:anywhere}
-  .shot{flex-basis:min(232px, 68vw)}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; scroll-behavior:auto !important}
 }

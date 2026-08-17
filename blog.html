@@ -1,0 +1,34 @@
+---
+layout: kaizenly
+permalink: /blog/
+title: "Blog — Kaizenly"
+description: "Notes on building habits that stick, and on the app itself."
+wide: true
+published: false
+---
+
+{% comment %}
+  published: false until the first post exists. An index page listing nothing is a
+  thin page, and thin pages compete with the ones that matter for crawl attention.
+  Delete that line the day _posts/ has something in it.
+
+  Pagination: jekyll-paginate is on GitHub Pages' allowlist but in Jekyll 3 it can
+  only paginate a file named index.html, which this is not. Below about forty posts
+  a single list is fine and faster for a reader. Past that, either move this to
+  /blog/index.html and switch on jekyll-paginate, or split by tag.
+{% endcomment %}
+
+<h1>Blog</h1>
+<p class="tag">Notes on building habits that stick, and on the app itself.</p>
+
+<div class="postlist">
+  {% for post in site.posts %}
+  <article>
+    <h2><a href="{{ post.url | absolute_url }}">{{ post.title }}</a></h2>
+    <p class="postmeta">
+      <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d %B %Y" }}</time>
+    </p>
+    <p>{{ post.description | default: post.excerpt | strip_html | truncate: 160 }}</p>
+  </article>
+  {% endfor %}
+</div>

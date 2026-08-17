@@ -47,6 +47,56 @@ jekyll serve      # http://127.0.0.1:4000
 A plain `gem install jekyll` fails on `ffi` requiring Ruby >= 3.0. Don't retry it — either use the
 pins above or install a modern Ruby first.
 
+## The layout system
+
+Sizes are `clamp()`ed between a phone value and a desktop value and interpolate with the viewport,
+so there is no width at which the page is between designs. Only two breakpoints remain, and both
+switch layout *mode* rather than size:
+
+| | |
+|---|---|
+| **860px** | one column becomes two, and the screenshot scroller becomes a grid |
+| **520px** | touch affordances — stacked footer links, breakable filenames |
+
+Two container widths, because they answer different questions. `.wrap` is a 760px reading column
+for long-form pages. `.wrap.wide` is 1160px for pages that should use the screen — set `wide: true`
+in front matter. `--gutter` is the single source of truth for side padding; anything that bleeds to
+the viewport edge must offset by exactly that, or the whole page scrolls sideways.
+
+Verified with a headless-Chrome harness that loads every page in an iframe at 320, 360, 390, 412,
+480, 600, 768, 860, 900, 1024, 1280, 1440 and 1920px and asserts no element escapes the viewport.
+Scroll containers are excluded, since they are meant to be wider than their box. Re-run it after
+any layout change — it has caught two real overflow bugs already.
+
+## Adding a blog post
+
+Drop a Markdown file in `_posts/` named `YYYY-MM-DD-slug.md`:
+
+```yaml
+---
+layout: kaizenly-post
+title: "Under 60 characters, keyword first"
+description: "One or two sentences — this is the search snippet."
+---
+```
+
+Posts publish to `/blog/<slug>/` and get `BlogPosting` structured data, an `article` Open Graph
+type and a reading time automatically. The body is plain Markdown — the `.prose` block in
+`assets/css/kaizenly.css` typesets the bare `h2`/`p`/`ul`/`blockquote`/`pre`/`table` kramdown emits,
+so a post never carries layout classes of its own.
+
+`blog.html` is the index and is `published: false` until the first real post exists — an index
+listing nothing is a thin page competing for crawl attention. Delete that line to switch it on.
+
+`_posts/2026-08-17-kitchen-sink.md` is a fixture, not content. It contains every element Markdown
+can produce and is `published: false`; flip it to `true` to re-run the responsive audit against a
+realistic post, then flip it back.
+
+**Pagination**, when there are enough posts to need it: `jekyll-paginate` is on GitHub Pages'
+allowlist, but under Jekyll 3 it can only paginate a file named `index.html`. Below roughly forty
+posts a single list is fine and faster to read. Past that, move the index to `/blog/index.html` and
+switch the plugin on, or split by tag.
+
 ## Adding a page
 
 Front matter, then plain HTML. No Markdown needed, no layout boilerplate:

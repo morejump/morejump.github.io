@@ -5,11 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="B7RP-V3zJawPNn0YBkikmkohiT753aYMQyU--xWd8bA" />
 
-<title>{{ page.title }}</title>
+{% comment %}
+  page.date is the reliable "is this a blog post?" test — every _posts entry has
+  one and no page does. Posts get the site name appended so a search result reads
+  "Post title — Kaizenly"; the hand-built pages already carry it in their own title.
+{% endcomment %}
+<title>{{ page.title }}{% if page.date %} — Kaizenly{% endif %}</title>
 <meta name="description" content="{{ page.description }}">
 <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
 
-<meta property="og:type" content="website">
+<meta property="og:type" content="{% if page.date %}article{% else %}website{% endif %}">
 <meta property="og:site_name" content="Kaizenly">
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:description" content="{{ page.description }}">
@@ -51,9 +56,27 @@
   structured data contradicts the store.
 {% endcomment %}
 {% endif %}
+{% if page.date %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "description": {{ page.description | jsonify }},
+  "datePublished": {{ page.date | date_to_xmlschema | jsonify }},
+  "dateModified": {{ page.last_modified_at | default: page.date | date_to_xmlschema | jsonify }},
+  "mainEntityOfPage": {{ page.url | absolute_url | jsonify }},
+  "author": { "@type": "Organization", "name": "Kaizenly" },
+  "publisher": {
+    "@type": "Organization", "name": "Kaizenly",
+    "logo": { "@type": "ImageObject", "url": {{ '/icon.png' | absolute_url | jsonify }} }
+  }
+}
+</script>
+{% endif %}
 </head>
 <body>
-  <div class="wrap">
+  <div class="wrap{% if page.wide %} wide{% endif %}">
     {{ content }}
 
     <div class="links">
