@@ -23,7 +23,11 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
-.wrap{max-width:720px; margin:0 auto; padding:64px 24px 48px}
+/* --gutter is the single source of truth for the page's side padding. Anything that
+   bleeds to the viewport edge must offset by exactly this, or it overflows the body
+   and the whole page scrolls sideways — which is what happened when the screenshot
+   strip hard-coded -24px against the 18px mobile padding. */
+.wrap{--gutter:24px; max-width:720px; margin:0 auto; padding:64px var(--gutter) 48px}
 .logo{width:96px;height:96px;border-radius:22px;margin:0 auto 24px;display:block;box-shadow:var(--shadow)}
 .logo-sm{width:44px;height:44px;border-radius:11px;vertical-align:middle;margin-right:10px}
 
@@ -63,7 +67,7 @@ li{margin:6px 0}
    you it scrolls — no arrows, no JS. */
 .shots{
   display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity;
-  margin:0 -24px 6px; padding:4px 24px 18px;
+  margin:0 calc(-1 * var(--gutter)) 6px; padding:4px var(--gutter) 18px;
   -webkit-overflow-scrolling:touch; scrollbar-width:thin;
 }
 .shot{flex:0 0 232px; scroll-snap-align:center; margin:0}
@@ -143,8 +147,15 @@ footer{text-align:center; color:var(--muted); font-size:.85rem; margin-top:36px}
 .badge{color:var(--muted); font-size:.9rem}
 
 @media (max-width:520px){
-  .wrap{padding:40px 18px 36px}
+  .wrap{--gutter:18px; padding:40px var(--gutter) 36px}
   h1{font-size:2rem}
   h1.left{font-size:1.75rem}
   .card{padding:22px 20px}
+  /* Footer links stack instead of crowding onto one line, and each one gets a
+     touch target with room around it rather than a 10px margin. */
+  .links a{display:inline-block; padding:8px 10px; margin:2px 0}
+  /* A long unbroken filename — "Loop Habits Backup 2026-08-16.db" — is wider than
+     a 320px phone and would push the card out on its own. */
+  code{overflow-wrap:anywhere}
+  .shot{flex-basis:min(232px, 68vw)}
 }
